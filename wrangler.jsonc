@@ -1,9 +1,5 @@
 {
-	"name": "marble-docs",
-	"compatibility_date": "2026-10-01",
-  "pages_build_output_dir": "dist",
-	"assets": {
-		"directory": "./dist",
-		"not_found_handling": "404-page"
-	}
+  "name": "marble-docs",
+  "compatibility_date": "2026-10-01",
+  "pages_build_output_dir": "./dist",
 }

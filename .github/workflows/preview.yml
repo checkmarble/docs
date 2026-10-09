@@ -10,9 +10,6 @@ concurrency:
   group: preview-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
-env:
-  CLOUDFLARE_WORKER: ${{ vars.CLOUDFLARE_WORKER || 'marble-docs' }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -52,43 +49,26 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     permissions:
       contents: read
+      deployments: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: wrangler.jsonc
-          sparse-checkout-cone-mode: false
-
       - uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
       - id: deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler-output.ndjson
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          npx --yes wrangler@4.149.0 versions upload \
-            --name "$CLOUDFLARE_WORKER" \
-            --preview-alias "pr-$PR_NUMBER" \
-            --message "PR #$PR_NUMBER ($HEAD_SHA)"
-
-          jq -r 'select(.type == "version-upload") | "alias-url=\(.preview_alias_url // "")\nurl=\(.preview_url // "")"' \
-            "$WRANGLER_OUTPUT_FILE_PATH" >> "$GITHUB_OUTPUT"
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=marble-docs --branch=pr-${{ github.event.pull_request.number }} --commit-hash=${{ github.event.pull_request.head.sha }}
 
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: preview
           message: |
-            📘 **Docs preview:** ${{ steps.deploy.outputs.alias-url }}
+            📘 **Docs preview:** ${{ steps.deploy.outputs.pages-deployment-alias-url }}
 
-            This commit (`${{ github.event.pull_request.head.sha }}`): ${{ steps.deploy.outputs.url }}
+            This commit (`${{ github.event.pull_request.head.sha }}`): ${{ steps.deploy.outputs.deployment-url }}
             API reference from `checkmarble/marble-backend@${{ needs.build.outputs.openapi-ref }}`.

@@ -1,8 +1,8 @@
 ---
 title: "Introduction"
+sidebar:
+  order: 100
 ---
-
-import Glossary from '../../../components/Glossary.astro';
 
 Before we dive into how to edit a scenario, let us give an overview of what a scenario is made of, and how it is executed.
 
@@ -34,13 +34,13 @@ Both methods follow the same four steps during scenario execution:
 4. **<Glossary>Decision</Glossary>Creation** : After all rules are executed, compare the total score to the scenario thresholds to determine the <Glossary>Outcome</Glossary>. Store the decision along with the input data and the results of each rule.
    1. Optionally, if a [workflow](/workflows/workflows-configuration/) is defined, this is where the decision may be automatically added to a case.
 
-:::caution[Error handling during scenario execution]
+<Aside type="caution" title="Error handling during scenario execution">
 Some errors can occur during rule execution due to the data used in the rule. Common unavoidable errors include division by zero and comparisons involving null fields (which can originate from the payload or ingested data).
 
 If an expected error occurs during the trigger condition rule execution, the API returns a status code 400, similar to when the rule evaluates to `false`.
 
 If an error occurs during the execution of a scenario rule, an error code is stored as the result of that rule's execution. The decision score is not incremented, and scenario execution continues. You can review the detailed rule execution results in the app's decisions detail panel to identify the error source.
-:::
+</Aside>
 ### How to request a scenario execution by API
 
 There are two available ways to execute a scenario on a payload by API.

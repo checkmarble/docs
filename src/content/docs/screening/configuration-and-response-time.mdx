@@ -1,5 +1,7 @@
 ---
 title: "Configuration and response time"
+sidebar:
+  order: 800
 ---
 
 ## Life cycle of a screening search
@@ -62,11 +64,11 @@ We recommend running the yente application with the entrypoint `uvicorn yente.as
 
 ### \[BETA] Replace yente with motiva
 
-:::note
+<Aside type="note">
 This is provided as beta software, please reach out to us if you encounter any blocking issue as compared with how Yente works.
-:::
+</Aside>
 
-Another Open-Source product, <a href="https://github.com/apognu/motiva" target="_blank" rel="noopener">motiva</a>, is a reimplementation of part of Yente, featuring more efficient resource management, and faster scoring and could be used as a replacement for the scoring API part of Yente. It supports `logic-v1` as a scoring algorithm.
+Another Open-Source product, [motiva](https://github.com/apognu/motiva), is a reimplementation of part of Yente, featuring more efficient resource management, and faster scoring and could be used as a replacement for the scoring API part of Yente. It supports `logic-v1` as a scoring algorithm.
 
 It is not a complete replacement, so still requires the Yente indexer as well as the Yente API to alongside it, and might produce slightly different results, but can be used in situations where high throughput is required.
 

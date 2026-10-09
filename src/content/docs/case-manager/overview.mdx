@@ -1,16 +1,16 @@
 ---
 title: "Overview"
+sidebar:
+  order: 100
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 ## Introduction
 
 The **Case Manager** is designed to provide analysts with a streamlined, focused, and efficient workspace for investigating fraud cases. With dynamic action panels, context-aware views, and powerful data exploration tools, it minimizes manual effort, enhances compliance, and lays the foundation for a more automated case management.
 
-:::note
+<Aside type="note">
 #### **Tip:** Configure your escalation inboxes and data display for optimal efficiency: [Configuration Guide](/case-manager/configuration/)
-:::
+</Aside>
 
 ***
 
@@ -23,11 +23,11 @@ Click on **My inbox**  to access your **dedicated personal inbox** that consolid
 * View your investigations in one place
 * Cases are prioritized by date and status for efficient triage
 
-  <Screenshot src="case-manager/overview-1.png" bordered />
+  <Screenshot src="case-manager/overview/overview-1.png" bordered />
 
-:::note
+<Aside type="note">
 If you are looking for a **closed case**, click on **Add new filter** → **Closed only**.
-:::
+</Aside>
 
 ***
 
@@ -35,7 +35,7 @@ If you are looking for a **closed case**, click on **Add new filter** → **Clos
 
 The Case Manager offers many features designed to streamline your investigations and reduce manual effort. The image below highlights the main components of the interface — each of which is described in detail in the sections that follow.
 
-<Screenshot src="case-manager/overview-2.png" bordered />
+<Screenshot src="case-manager/overview/overview-2.png" bordered />
 
 ### Escalation
 
@@ -106,7 +106,7 @@ See everything that happened on the case since its creation:
 * Filter by the event types that matter to you
 * Add notes and documents to the case
 
-<Screenshot src="case-manager/overview-3.png" bordered />
+<Screenshot src="case-manager/overview/overview-3.png" bordered />
 
 ***
 
@@ -118,7 +118,7 @@ Access every alert tied to a case:
 * Detection rules sorted by relevance (highest score first)
 * Expand panels for full alert insight, as you can see below, by clicking on "eye" icon when hovering an alert
 
-<Screenshot src="case-manager/overview-4.png" bordered />
+<Screenshot src="case-manager/overview/overview-4.png" bordered />
 
 ***
 
@@ -135,11 +135,11 @@ Conduct deep investigations with access to all objects linked to a customer or c
 * Get information about the object's pivot, and this pivot's pivot
 * Browse transactions, accounts, users, or any data related to the triggering object
 
-<Screenshot src="case-manager/overview-5.png" bordered />
+<Screenshot src="case-manager/overview/overview-5.png" bordered />
 
-:::note
+<Aside type="note">
 In order to explore objects related to the customer, like transactions, you should first click on "Create navigation option" and select the field used to sort the records (e.g. timestamp for creation of the field is often a best practice).
-:::
+</Aside>
 
 ***
 
@@ -149,11 +149,11 @@ Add comment, tags or files to objects directly from the Clients Concerned tab. T
 
 * to **the pivot**, i.e. your user. These annotations will be visible both in the investigation timeline of the case, and in the right section of every other cases related to the same user.
 
-  <Screenshot src="case-manager/overview-6.png" bordered />
+  <Screenshot src="case-manager/overview/overview-6.png" bordered />
 
 * to **entries in your data exploration**, i.e. other transactions made by the same user. These annotations will be visible every time you meet the same transaction in the data exploration of a case.
 
-  <Screenshot src="case-manager/overview-7.png" bordered />
+  <Screenshot src="case-manager/overview/overview-7.png" bordered />
 
 ***
 

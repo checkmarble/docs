@@ -1,8 +1,8 @@
 ---
 title: "Real-Time Processing"
+sidebar:
+  order: 500
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 Now, it's time to shift our focus to real-time decisions. We'll maintain our existing asynchronous decision-making processes and integrate the real-time decisions API for time-sensitive decisions.
 
@@ -18,7 +18,7 @@ This advancement unlocks use cases such as:
 
 Before proceeding with decision-making, let's create a scenario specifically tailored for real-time decisions. We'll focus on monitoring outgoing transactions where the payment method is a card (`direction = PAYOUT` and `payment_method = CARD`):
 
-<Screenshot src="getting-started/real-time-processing-1.png" caption="Real-time card transactions trigger" width="75%" bordered />
+<Screenshot src="getting-started/real-time-processing/real-time-processing-1.png" caption="Real-time card transactions trigger" width="75%" bordered />
 
 Following our previous steps, let's create the following rules:
 
@@ -32,7 +32,7 @@ Following our previous steps, let's create the following rules:
   * Maintaining a list of known low-risk bank BINs is essential.
 * Ascertain if the card has been used more than three times in the last two hours.
 
-<Screenshot src="getting-started/real-time-processing-2.png" caption="Real-time card transactions rules" width="75%" bordered />
+<Screenshot src="getting-started/real-time-processing/real-time-processing-2.png" caption="Real-time card transactions rules" width="75%" bordered />
 
 Finally, we'll define the following outcomes, each mapped to a specific action in our system:
 

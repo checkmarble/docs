@@ -1,8 +1,8 @@
 ---
 title: "Grouping decisions"
+sidebar:
+  order: 300
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 ## Context
 
@@ -10,9 +10,9 @@ import Screenshot from '../../../components/Screenshot.astro';
 
 Decisions in Marble are created on entities such as a `transaction` or `account`, that are declared in the data model edition interface. Because every organization's data model is different, there is no generic hierarchy to data model objects that allows *by default* to correlate all decisions related to a same customer.
 
-:::tip[Note]
+<Aside type="tip" title="Note">
 For simplicity we use the work "customer" below, to indicate the data entity in the user organization's data model. Typically this will correspond to an entity named `user`, `customer`, `company` or likewise. However there may be use cases where decisions should grouped at the level of something that is not a "person", such as an account identifier or crypto wallet hash. The principles below still apply.
-:::
+</Aside>
 Grouping decisions by customer is useful because it allows you to have memory from one decision to the next: if you are able to group decisions, you can snooze a rule or group of rules for a customer for a certain time, group alerts into the same case in the investigation interface, annotate the customer with comments, tags and files, explore transactions and events related to the customer in an alert without leaving the Marble application, and more.
 
 A bank will typically want to investigate all (present and past) alerts related to the same customer (natural person, company...) in the same interface, and keep memory from one investigation to the next.
@@ -40,32 +40,32 @@ Decision grouping is configured from the data model edition page, in its "schema
 
 **Step by step:**
 
-<Screenshot src="data-model/grouping-decisions-1.png" alt="Start with a complete data model, including links" caption={"Start with a complete data model, including links. Click \"Create a decision group\" to get started"} bordered />
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-1.png" alt="Start with a complete data model, including links" caption={"Start with a complete data model, including links. Click \"Create a decision group\" to get started"} bordered />
 
-<Screenshot src="data-model/grouping-decisions-2.png" caption="Choose which entity (linked directly or indirectly from the entity you are updating) corresponds to the end customer, at which level you want to perform the investigations." width="70%" bordered />
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-2.png" caption="Choose which entity (linked directly or indirectly from the entity you are updating) corresponds to the end customer, at which level you want to perform the investigations." width="70%" bordered />
 
-<Screenshot src="data-model/grouping-decisions-3.png" caption="If there is more than one path (following links) from the starting entity to the target entity, choose which path(s) to follow" width="700px" bordered />
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-3.png" caption="If there is more than one path (following links) from the starting entity to the target entity, choose which path(s) to follow" width="700px" bordered />
 
-<Screenshot src="data-model/grouping-decisions-4.png" alt="Visualize the decision grouping configuration on the transactions table" width="700px" bordered>Visualize the decision grouping configuration on the `transactions` table...</Screenshot>
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-4.png" alt="Visualize the decision grouping configuration on the transactions table" width="700px" caption="Visualize the decision grouping configuration on the transactions table..." bordered />
 
-<Screenshot src="data-model/grouping-decisions-5.png" caption="... or visualize a sneak peak of the configuration on the table header" width="700px" />
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-5.png" caption="... or visualize a sneak peak of the configuration on the table header" width="700px" />
 
-:::tip[Special case where the entity itself represents the customer]
+<Aside type="tip" title="Special case where the entity itself represents the customer">
 There is one special case, where the entity *itself* represents the customer. For example, in the example above, if we configure decision grouping for decisions made on the `companies` entity.
 
 In this case, the configuration is the same, though the second step (link selection) is skipped.
-:::
-:::note[Fallback mechanism for tables without any links]
+</Aside>
+<Aside type="note" title="Fallback mechanism for tables without any links">
 As a limited support special case, you may correlate alerts related to the same customer, based on an entity without links to other entities, by selecting a field of that entity to group by. However, we recommend you rather create a "parent" customer entity and link to it, even if you do not intend to write any specific data on it, for full support in the investigation interface.
 
-<Screenshot src="data-model/grouping-decisions-6.png" width="40%" bordered />
-:::
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-6.png" width="40%" bordered />
+</Aside>
 
 ### Grouped decisions in practice
 
 A typical case investigation for a customer that had previous alerts and some comments attached might look like this in the case manager "customer" right panel:
 
-<Screenshot src="data-model/grouping-decisions-7.png" width="50%" bordered />
+<Screenshot src="data-model/grouping-decisions/grouping-decisions-7.png" width="50%" bordered />
 
 ### Limitations
 

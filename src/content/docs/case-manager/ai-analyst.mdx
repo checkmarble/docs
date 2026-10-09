@@ -1,14 +1,14 @@
 ---
 title: "AI Analyst"
+sidebar:
+  order: 600
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 The Case Manager offers AI features that provide an automated review of created cases, as well as an enrichment of your KYC information. By analyzing alerts and related data, it identifies potential risks, highlights key insights, and delivers an initial opinion along with actionable recommendations. This helps investigators save time and focus on the most critical aspects of each case.
 
-:::note
+<Aside type="note">
 Case Manager AI features are only available for our SaaS users at the moment.
-:::
+</Aside>
 
 ## AI Review
 
@@ -18,7 +18,7 @@ Every time a case is created, an AI review will be automatically generated, and 
 
 You can read in all cases in the "AI review extract" box:
 
-<Screenshot src="case-manager/ai-analyst-1.png" bordered />
+<Screenshot src="case-manager/ai-analyst/ai-analyst-1.png" bordered />
 
 When you access the AI Review, you'll also have the possibility to:
 
@@ -29,7 +29,7 @@ When you access the AI Review, you'll also have the possibility to:
 
 By clicking on the "See all" icon, you will be able to have the full Report of the case on the right side of your screen. You will be able to vote wether the review was useful or not and add the review as a comment.
 
-<Screenshot src="case-manager/ai-analyst-2.png" bordered />
+<Screenshot src="case-manager/ai-analyst/ai-analyst-2.png" bordered />
 
 ### Settings
 
@@ -45,15 +45,15 @@ You can customize your AI Reviews from *Settings* → *Case Manager*. You will h
 
 The AI Agent can explore the web to provide additional data about your customer and help you analyze a case. Click on the **KYC Enrichment** button in the right panel to access this AI-generated KYC report.
 
-<Screenshot src="case-manager/ai-analyst-3.png" bordered />
+<Screenshot src="case-manager/ai-analyst/ai-analyst-3.png" bordered />
 
 The AI Agent will find any relevant information about the user: negative news, infos on PEP links, job or company information. Once generated, this report can be added to the *Investigation* timeline by clicking on **Attach to notes**.
 
 Note that if you generate the KYC enrichment, all this additional data will be used when generating a new AI case review.
 
-:::caution
+<Aside type="caution">
 This feature calls external APIs that treat any data received in the United States. You can disable it from the settings, as explained in the following section.
-:::
+</Aside>
 
 ### Settings
 

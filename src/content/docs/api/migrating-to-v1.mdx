@@ -1,0 +1,87 @@
+---
+title: Migrating from the legacy API to v1
+description: Migration guide from the deprecated Marble public API to the official v1.
+sidebar:
+  order: 200
+---
+
+This page offers advice on how to migrate from the legacy Marble public API (deprecated as of July 24th, 2025 and to be removed in Feb 2026) to the official v1 Marble API.
+
+<Aside type="tip" title="New customers">
+If you are a new Marble user or starting a new Marble implementation from scratch, you can safely ignore this page.
+</Aside>
+
+## Response format changes
+
+**Before**
+
+In the unversioned "v0" API, the endpoints were returning objects in an inconsistent way. For example,
+
+- the `GET /decision` and the `POST /decision` endpoint would return a decision object directly
+- the `POST /decisions/all` endpoint would return an object with a "decisions" key and a nested array of decisions
+- the `GET /decisions` endpoint would return an object with an "items" key and a nested array of decisions, and a "has_next_page" boolean key
+- the `GET /scheduled-executions` would return an object with a "scheduled_executions" key and a nested array of scheduled executions
+
+**After**
+
+All endpoints (that return data) return an object with a "data" key, that contains the object (for endpoints that return a single item) or an array of objects. See the Pagination section in [the introduction](/api/introduction/#pagination)
+
+### Object renamings and field changes
+
+- Some entities have been renamed ("scheduled-execution" => "batch-execution") to better reflect their usage
+- The decision and batch-execution objects have had their fields modified. Some fields that were internal in nature have been removed, while more recently added fields have been added.
+  - The decision model now also contains the data on screenings done within a scenario.
+  - See [the endpoint definition](/api/v1/) for a more complete description of the new decision model.
+
+## Path changes
+
+Some URL path prefixes and suffixes have been changed, for a more "semantically correct" path and because the public endpoints no longer clash with internal endpoints.
+
+| v0 path                            | v1 path                         |
+| :--------------------------------- | :------------------------------ |
+| `/ingestion/{object_type}`          | `/v1/ingest/{object_type}`       |
+| `/ingestion/{object_type}/multiple` | `/v1/ingest/{object_type}/batch` |
+| `/scheduled-executions`             | `/v1/batch-executions`           |
+
+## Input body changes
+
+- The `POST /decisions` endpoint no longer takes an `object_type` property (because that is implicit from the `scenario_id` that is passed).
+
+## Query param option changes
+
+The options available to list decisions on the `GET /decisions` have been both restricted and extended:
+
+**restricted**:
+
+- the endpoint no longer accepts several values of a given parameter, to filter "all entries that match at least one of these options" (also, all those parameters have been renamed from `outcome[]` to `outcome`, and so on)
+- `has_case` filtering has been removed
+
+**added**:
+
+- filter decisions by `trigger_object_id`, `case_id`, `review_status`
+
+**modified**:
+
+- `start_date` => `start`, `end_date` => `end`, and `start` takes a default value of "30 days ago". The range between `start` and `end` cannot be more than 90 days.
+
+## Input validation for ingestion
+
+The v1 `POST/PATCH /ingest` endpoints **no longer allow additional properties**: passing fields that are not defined in the customer data model now returns a 400 status code. We made this change to follow a "principle of least surprise" when using the API.
+
+The existing legacy public API endpoints now log a warning log every time an unknown additional property is received (for self-hosted users).
+
+## Authentication
+
+The v1 API accepts authentication with a Bearer token (see [intro](/api/introduction/#authentication)).
+
+<Aside type="tip" title="Compatibility">
+For compatibility, public API v1 will still accept authentication through the `x-api-key` header. This may be removed in a future major API version.
+</Aside>
+
+## Error responses
+
+The basic error response body (in particular for 400/422 status codes) has been modified.
+
+## And a lot of new endpoints
+
+Finally, public API v1 gives you access to several new actions, including the option to read and interact with screenings via API. Try them out !

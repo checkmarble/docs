@@ -1,8 +1,8 @@
 ---
 title: "Configuration"
+sidebar:
+  order: 400
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 To get the best experience with the Case Manager, there are a few settings you should configure before using it in production.
 
@@ -14,15 +14,15 @@ You can manage inbox settings from the **Settings → Inboxes** menu:
 
 * **Create a new inbox:** click the `Create new inbox` button at the top of the inbox list to add a new inbox. You can also create one directly from the Case Manager using the same button located below the inbox list.
 
-  <Screenshot src="case-manager/configuration-1.png" width="500px" bordered />
+  <Screenshot src="case-manager/configuration/configuration-1.png" width="500px" bordered />
 
 * **Add an escalation inbox:** select an inbox, then click `Update inbox` to choose an Escalation Inbox. This defines where cases will be redirected if you choose to escalate them from the Case Manager.
 
-  <Screenshot src="case-manager/configuration-2.png" width="500px" bordered />
+  <Screenshot src="case-manager/configuration/configuration-2.png" width="500px" bordered />
 
 * **Add users to the inbox:** after selecting an inbox, use the**Members** panel at the bottom to manage its users. You can add users (as long as they’re already part of your Marble instance), remove them, or change their roles. Only members and admin of an inbox can see its content.
 
-  <Screenshot src="case-manager/configuration-3.png" bordered />
+  <Screenshot src="case-manager/configuration/configuration-3.png" bordered />
 
 *Common use case* :
 
@@ -42,10 +42,10 @@ There are two types of tags:
 * **Cases tags:** these tags will be assigned to cases. They are available from the top section of your cases.
 * **Object tags:** these tags will be assigned to objects from your database. They are available on the *data exploration* section in the right panel of a case.
 
-  <Screenshot src="case-manager/configuration-4.png" bordered />
+  <Screenshot src="case-manager/configuration/configuration-4.png" bordered />
 
-:::note[Data Display]
+<Aside type="note" title="Data Display">
 You can use choose the way your objects are displayed in the case manager by changing the order of the fields and the visibility of the fields directly in the data tables.
 
-<Screenshot src="case-manager/configuration-5.png" width="500px" bordered />
-:::
+<Screenshot src="case-manager/configuration/configuration-5.png" width="500px" bordered />
+</Aside>

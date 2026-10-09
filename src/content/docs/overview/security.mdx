@@ -1,0 +1,70 @@
+---
+title: Security
+description: Compliance, access control, infrastructure and data security at Marble.
+sidebar:
+  order: 500
+---
+
+<Aside type="note" title="Marble open-source">
+Most of the information below only applies for the Marble SaaS. If you are using Marble open-source or on premises, you are responsible for your organization's and infrastructure's security.
+</Aside>
+
+## Compliance
+
+- **SOC2 Type 2 certified**
+- Strict **implementation of EBA guidelines** for essential outsourced services :
+  - Audit rights for the customer and the regulator
+  - Open subcontractor list for Marble, subject to the same guidelines and customer’s approval (sub-outsourcing framework agreement)
+  - Reversibility of the service
+  - Service Level Agreement
+  - Monitoring of EBA policies to continue to meet the new standards
+- **GDPR compliant**
+  - All data hosted in EEU
+  - Privacy by design
+
+## Access and organizational security
+
+- **Authentication**: we have Single Sign On (SSO), 2-factor authentication (2FA) and strong password policies to ensure access to Marble’s cloud services and SaaS are protected.
+- **Password Managers**: all company-issued laptops have a password manager in place for team members to manage passwords and maintain password best practices.
+- **Permissions**: access to cloud infrastructure and other sensitive tools are limited to authorized employees who require it for their role.
+- **Security policy deployed** (for travels, out-of-office work, in-office practices, laptop configurations, and encryption)
+- **Least privileged access control**:
+  - Production account is only accessible by Senior DevOps employees, on a need-to-do basis
+  - No manual access for ordinary operations
+  - Minimally scoped permissions for apps running
+
+## Internal technical security
+
+- **Security hardening**: Policy of least necessary privilege, reduction of attack surface
+- **Web application firewall**: all traffic transits through a load balancer with Cloud Armor WAF enabled
+- **Static code scanning** (library vulnerabilities with Dependabot, secret scanning, github CodeQL + Bearer SAST) and **docker images scanning** (GCP Artifact registry)
+- **Third-party penetration testing**: we work with independent security consultants to conduct regular penetration tests on all parts of our system.
+- **Auditability** (log trails)
+
+## 3rd party providers
+
+- Up-to-date list of 3rd party services used with production data can be provided on request at any moment
+- Current list is:
+  - GCP (servers located in the EU, with the EBA Financial Services Addendum)
+  - Mixpanel (servers located in the EU - does not treat end user data)
+  - Segment (servers located in the EU - does not treat end user data)
+  - Metabase (servers located in the EU - does not treat end user data)
+  - Microsoft Azure (does not treat end user data)
+  - Sentry (servers located in the EU - does not treat end user data)
+  - Convoy (servers located in the EU - does not treat end user data)
+
+## Data
+
+- **Cloud-native platform hosted in the EU on GCP**: all our services are hosted with Google Cloud Platform (GCP) in Europe (mainly France and Belgium). For more information please visit [GCP Security](https://cloud.google.com/docs/security/infrastructure/design).
+- **Data encryption**: data is encrypted at rest and in transit using state-of-the-art standards (compatible TLS 1.3, AES256)
+- **Data isolation**:
+  - Specific GCP account for production on which only Senior DevOps employees have access
+  - Option to store ingested data on a distinct database instance from other customers (contact us)
+- **Data integrity**:
+  - Multiple backups of data (daily DB backups, write-ahead log archiving, deletion protection, multi-zone DB instances with replicas in a distinct region)
+  - Rigorous permission controls on data access by API clients
+
+## Features
+
+- **IP Whitelisting:** setup the IP ranges on which your application and APIs should be reachable
+- **Enterprise SSO with OpenID Connect**: coming soon

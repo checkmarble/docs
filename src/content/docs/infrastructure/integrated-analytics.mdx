@@ -1,6 +1,8 @@
 ---
 title: "Integrated analytics"
 description: "Tuning Marble to use the integrated analytics module, with production-grade performance"
+sidebar:
+  order: 400
 ---
 
 Tuning Marble to use the integrated analytics module, with production-grade performance
@@ -11,9 +13,9 @@ As of v0.57, Marble includes a fully integrated analytics engine to display and 
 
 **At the most basic level, integrated analytics will work just by configuring the `ANALYTICS_BUCKET_URL` environment variable on the api and background worker containers**. This should be a properly formatted blob storage bucket URL, as described in the note below.
 
-:::caution
+<Aside type="caution">
 This feature is only compatible with S3 and GCS, not Azure blob storage, as of Dec 2025. Azure blob storage option will be added on request for paying customers. S3-compatible solutions should allow offset-based file reading for good performance.
-:::
+</Aside>
 
 ### Production deployment
 
@@ -28,6 +30,6 @@ On the server side, by default, analytics queries will run in the container in `
 
 In either case, note that retrieving files from the blob storage takes up an important fraction of the initial query execution time, and that the data from the parquet files are put in an in-memory cache once queried. **As a consequence cache hits and performance are optimized on long-lived server instances**. As an illustration, Marble's SaaS offering uses a Cloud Run instance with 6 vCPU, 1 minimum instance, per-request billing to keep billing low and optimize response time.
 
-:::note
+<Aside type="note">
 The pre-0.57 embedded Metabase dashboard remains accessible, on a purely optional basis, for customers with a license. It is configured with the `METABASE_*` environment variables. For self-hosted customers only, this can be a convenient way of exposing more BI data directly in the Marble app.
-:::
+</Aside>

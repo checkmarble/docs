@@ -1,9 +1,9 @@
 ---
 title: "Proof-of-concept"
 description: "Define a data-model and upload data, activate your first scenario and make scheduled decisions."
+sidebar:
+  order: 300
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 Define a data-model and upload data, activate your first scenario and make scheduled decisions.
 
@@ -70,7 +70,7 @@ We'll want to check for several things:
 
 In the [scenario's trigger page](/scenarios/trigger/), we'll limit our analysis to users with an "open" status who have made at least one transaction in the last 30 days.
 
-<Screenshot src="getting-started/proof-of-concept-1.png" width="75%" bordered />
+<Screenshot src="getting-started/proof-of-concept/proof-of-concept-1.png" width="75%" bordered />
 
 We'll implement a few simple [Rules](/scenarios/rules/):
 
@@ -79,23 +79,23 @@ We'll implement a few simple [Rules](/scenarios/rules/):
 3. Check if any transaction was sent to a blacklisted country.
 4. Check if the user has been a customer for more than 2 years.
 
-For the first one, we'll define a [Variable](/scenarios/aggregations/) that counts the number of transactions in a month :
+For the first one, we'll define a [Variable](/scenarios/formula/functions/aggregations/) that counts the number of transactions in a month :
 
-<Screenshot src="getting-started/proof-of-concept-2.png" width="50%" bordered />
+<Screenshot src="getting-started/proof-of-concept/proof-of-concept-2.png" width="50%" bordered />
 
 Then we'll use that count in a simple rule :
 
-<Screenshot src="getting-started/proof-of-concept-3.png" width="75%" bordered />
+<Screenshot src="getting-started/proof-of-concept/proof-of-concept-3.png" width="75%" bordered />
 
 Following the same process, let's create all rules:
 
-<Screenshot src="getting-started/proof-of-concept-4.png" width="75%" bordered />
+<Screenshot src="getting-started/proof-of-concept/proof-of-concept-4.png" width="75%" bordered />
 
 You'll note that the last rule ("user has been a customer for more than 2 years") has a negative score, meaning it **reduces** the risk score associated with the decision.
 
 To finish off this scenario, let's configure our [thresholds](/scenarios/decision/). We want the decision for a specific user to be "Declined" if at least one rule is true, so we'll use the following settings:
 
-<Screenshot src="getting-started/proof-of-concept-5.png" width="75%" bordered />
+<Screenshot src="getting-started/proof-of-concept/proof-of-concept-5.png" width="75%" bordered />
 
 The final step in making decisions on your users is to set up a schedule. Since we want to review these users monthly, we'll schedule it to run on the first day of every month.
 
@@ -103,7 +103,7 @@ Don't forget to [Activate](/scenarios/lifecycle/#activate-a-scenario-version) yo
 
 Eager to receive your first batch of decisions? Simply click "Launch now", and Marble will initiate a batch within the next few minutes (with a minimum 1-minute delay before it starts running).
 
-<Screenshot src="getting-started/proof-of-concept-6.png" width="75%" bordered />
+<Screenshot src="getting-started/proof-of-concept/proof-of-concept-6.png" width="75%" bordered />
 
 ## Processing decisions
 

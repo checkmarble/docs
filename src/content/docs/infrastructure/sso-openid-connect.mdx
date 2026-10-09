@@ -1,6 +1,8 @@
 ---
 title: "SSO / OpenID Connect"
 description: "How to setup Marble to use your OpenID Connect-compliant identity provider"
+sidebar:
+  order: 200
 ---
 
 How to setup Marble to use your OpenID Connect-compliant identity provider
@@ -9,9 +11,9 @@ Marble supports, from version .54 onwards, for users with a license, authenticat
 
 Configuring your Marble instance to use OpenID Connect will completely replace Firebase as the authentication provider. It means from then on, only Marble accounts whose email address match one on your identity provider will be able to log in.
 
-:::danger
+<Aside type="danger">
 If you were used to create aliases, such as `user+alias@domain.tld` for users to authenticate through different user accounts, those alias will now have no way to connect to your Marble instance.
-:::
+</Aside>
 
 As of now, the OpenID Connect configuration is **instance-wide**, so all your organizations will use the same OpenID Connect issuer and user pool. As such, there is still the requirement that Marble users are created beforehand in the **Settings** page before they can log in, so we can map them to their organization.
 
@@ -37,22 +39,22 @@ Configuring a Marble instance to use OpenID Connect requires adding four require
 | Variable                     | Req.                 | Description                                                                                                                                                                           |
 | :--------------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | AUTH\_PROVIDER               | :heavy\_check\_mark: | Set to `oidc` to enable OpenID Connect.                                                                                                                                               |
-| AUTH\_OIDC\_ISSUER           | :heavy\_check\_mark: | Issuer URL for your provider. Must match exactly (watch out for trailing slashes, for example) <sup>\[1]</sup>.                                                                       |
+| AUTH\_OIDC\_ISSUER           | :heavy\_check\_mark: | Issuer URL for your provider. Must match exactly (watch out for trailing slashes, for example) ¹.                                                                       |
 | AUTH\_OIDC\_CLIENT\_ID       | :heavy\_check\_mark: | Application's client ID.                                                                                                                                                              |
 | AUTH\_OIDC\_CLIENT\_SECRET   | :heavy\_check\_mark: | Application's client secret.                                                                                                                                                          |
 | AUTH\_OIDC\_SCOPE            |                      | Scopes to request, defaults to `openid,profile,email,offline_access`. Must be a valid OIDC scope set, and grant access to the required claims. The `openid` scope is always required. |
 | AUTH\_OIDC\_ALLOWED\_DOMAINS |                      | Comma-separated list of domains whose users will be allowed to log in. Defaults to allowing any user that has a valid and authorized account on the identity provider.                |
 | AUTH\_EXTRA\_PARAMS          |                      | Additional query string parameters to append to the authorize request.                                                                                                                |
 
-<sup>\[1]</sup>: The provided URL must expose a discovery endpoint for your provider. You can check by visiting `<issuer>/.well-known/openid-configuration`.
+¹: The provided URL must expose a discovery endpoint for your provider. You can check by visiting `<issuer>/.well-known/openid-configuration`.
 
 ## Required claims
 
 Any authenticated principal must present some claims that are required for the authentication to go through. The following table lists which claims are supported, whether they are required, and the **usual** scope that give access to them.
 
-:::note
+<Aside type="note">
 Depending on your provider's configuration, claims might be released when requesting different scopes than presented here.
-:::
+</Aside>
 
 | Claim           | Req.                 | Scope     | Usage                                |
 | :-------------- | :------------------- | :-------- | :----------------------------------- |
@@ -83,11 +85,11 @@ AUTH_OIDC_SCOPE='openid,profile,email'
 AUTH_OIDC_EXTRA_PARAMS='prompt=consent&access_type=offline'
 ```
 
-You can obtain a client ID / client secret pair by creating an OAuth2 client in the <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Developers Console</a>.
+You can obtain a client ID / client secret pair by creating an OAuth2 client in the [Developers Console](https://console.cloud.google.com/apis/credentials).
 
 ### Microsoft Entra ID
 
-To use your Microsoft Azure AD / Microsoft Entra ID directory as an identity provider, you must create a "Web" **App Registration** in your <a href="https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps" target="_blank" rel="noopener">Azure Portal</a> and create a **Client Secret** in the **Certificates & secrets** section.
+To use your Microsoft Azure AD / Microsoft Entra ID directory as an identity provider, you must create a "Web" **App Registration** in your [Azure Portal](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and create a **Client Secret** in the **Certificates & secrets** section.
 
 In order for the required claims to be released, you grant the appropriate permissions to the client, in the **API permissions** section. The required permissions are the following:
 

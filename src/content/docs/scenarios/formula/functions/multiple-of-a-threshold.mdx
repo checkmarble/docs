@@ -1,0 +1,29 @@
+---
+title: "Multiple of a threshold"
+sidebar:
+  order: 824
+---
+
+## Definition
+
+The **Multiple of a threshold** function allows you to check if a numeric field is a round amount, based on a reference threshold.
+
+You can select the thresholds between all powers of 10 from 1 to 1,000,000,000. The function will return `true` if your field is a multiple of the selected threshold, or `else` otherwise.
+
+## Example
+
+Let's say we want to check if the amount of a transaction is a multiple of 100:
+
+1. Click on the first operand of your rule
+2. Select **Functions → Multiple of a threshold**
+3. Select your transaction amount field
+4. Select the **100** threshold
+
+<Screenshot src="scenarios/formula/functions/multiple-of-a-threshold/multiple-of-a-threshold-1.png" caption={"Configuration of the \"Multiple of a threshold\" function"} width="400px" bordered />
+
+5. Choose the "**=**" operator
+6. Type `True` in the second operand
+
+There you go! Here's what your rule should look like:
+
+<Screenshot src="scenarios/formula/functions/multiple-of-a-threshold/multiple-of-a-threshold-2.png" caption="Rule checking if the transaction amount is a multiple of 100" width="500px" bordered />

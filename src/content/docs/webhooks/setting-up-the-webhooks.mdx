@@ -1,8 +1,8 @@
 ---
 title: "Setting up the webhooks"
+sidebar:
+  order: 200
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 ## Subscribe to webhooks
 
@@ -12,11 +12,11 @@ The subscription is configured by providing an endpoint URL, and optionally a li
 
 Only `https://` endpoints are authorized. URLs targeting internal network IP ranges, and a series of other protected IP ranges are forbidden by default, but can be enabled with an environment configuration for self-hosted users (see [link](technical-configuration)).
 
-:::note
+<Aside type="note">
 **Endpoint reachability test**
 
 The endpoint URL you configure must be reachable when you configure a new endpoint. A HEAD, GET and POST ping request will be sent to test its reachability (in that order, stopping if one request succeeds). One at least of those requests must return a 2XX status code to confirm reachability.
-:::
+</Aside>
 
 Several webhook subscriptions can be created for a given organization.
 
@@ -30,12 +30,12 @@ A new secret version can be generated from the webhooks detail page. When doing 
 
 ***
 
-<Screenshot src="webhooks/setting-up-the-webhooks-1.png" caption="Empty state webhooks" />
+<Screenshot src="webhooks/setting-up-the-webhooks/setting-up-the-webhooks-1.png" caption="Empty state webhooks" />
 
 ***
 
-<Screenshot src="webhooks/setting-up-the-webhooks-2.png" caption="set up a new webhook endpoint" width="50%" />
+<Screenshot src="webhooks/setting-up-the-webhooks/setting-up-the-webhooks-2.png" caption="set up a new webhook endpoint" width="50%" />
 
 ***
 
-<Screenshot src="webhooks/setting-up-the-webhooks-3.png" caption="webhook endpoint details" />
+<Screenshot src="webhooks/setting-up-the-webhooks/setting-up-the-webhooks-3.png" caption="webhook endpoint details" />

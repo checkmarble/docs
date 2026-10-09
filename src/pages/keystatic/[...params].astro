@@ -1,0 +1,20 @@
+---
+// Keystatic admin, a client-side app; deeper URLs fall back to this page (public/_redirects). See src/keystatic/integration.ts.
+import Admin from '../../keystatic/Admin';
+
+export const getStaticPaths = () => [{ params: { params: undefined } }];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<link rel="icon" href="/favicon.png" />
+		<title>Marble docs · Keystatic</title>
+	</head>
+	<body>
+		<Admin client:only="react" />
+	</body>
+</html>

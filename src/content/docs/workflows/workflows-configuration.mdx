@@ -1,8 +1,8 @@
 ---
 title: "Workflows configuration"
+sidebar:
+  order: 100
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 ## Introduction
 
@@ -18,7 +18,7 @@ To create a new workflow or update an existing one:
 2. Click on the scenario for which you wish to edit the workflow
 3. Click on *New workflow* or *Edit workflow* in the Workflow section
 
-<Screenshot src="workflows/workflows-configuration-1.png" caption="Create or edit a workflow from the Scenarios section" bordered />
+<Screenshot src="workflows/workflows-configuration/workflows-configuration-1.png" caption="Create or edit a workflow from the Scenarios section" bordered />
 
 ## Set up your workflow
 
@@ -35,9 +35,9 @@ Rules are conditions that will be checked when a new decision is made. When crea
 * **Rule hits:** the action will be executed if at least one of the selected rules was triggered.
 * **Payload field condition:** the action will be executed if a field of the triggering payload has a specific value.
 
-:::note
+<Aside type="note">
 You can combine several conditions into a single rule.
-:::
+</Aside>
 
 ### Actions
 
@@ -56,13 +56,13 @@ You can create dynamic text by using variables:
 * Write the name of your variable between percent signs `%`, such as `%account_id`or `holder_name`in the example below
 * Indicate the values of your variables in the selectors below the case name
 
-<Screenshot src="workflows/workflows-configuration-2.png" caption={"If a case is created for account 1234 held by John Doe, its name would be \"Case for 1234 - John Doe\""} width="500px" bordered />
+<Screenshot src="workflows/workflows-configuration/workflows-configuration-2.png" caption={"If a case is created for account 1234 held by John Doe, its name would be \"Case for 1234 - John Doe\""} width="500px" bordered />
 
 ## Example
 
 Here is an example of the workflows you can build on Marble:
 
-<Screenshot src="workflows/workflows-configuration-3.png" caption="Example of a complex workflow" bordered />
+<Screenshot src="workflows/workflows-configuration/workflows-configuration-3.png" caption="Example of a complex workflow" bordered />
 
 This workflows has 2 rules:
 

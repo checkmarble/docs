@@ -1,0 +1,49 @@
+---
+title: "Aggregations"
+sidebar:
+  order: 821
+---
+
+## Definition
+
+Aggregations allow you to make calculations on historical data to result into a single numerical value.
+
+They consist in operations made on filtered data from your Marble database to extract a specific information, that you can then use in your formula.
+
+## Aggregation types
+
+There are many available aggregation types on Marble:
+
+* **Average:** calculates the average value of a numerical field in the data frame resulting from your filters
+* **Count:** counts the total number of values in the data frame resulting from your filters
+* **Count distinct:** counts the distinct number of values of a specific field in the data frame resulting from your filters
+* **Max:** calculates the maximal value of a numerical field in the data frame resulting from your filters
+* **Min:** calculates the minimal value of a numerical field in the data frame resulting from your filters
+* **Sum:** calculates the sum of a numerical field in the data frame resulting from your filters
+
+## Building a variable
+
+A aggregated operand is called **a variable**. Let's say we want to create a variable calculating the *sum spent by the customer in card transactions in the last month.*
+
+A variable is composed of several elements:
+
+1. The **variable name** is indicative, it will help you understand quickly what the aggregation does when landing on the rule. It should be short but clear. In our example, we will name it *"Sum card debits L1M"*
+2. The **function** to be used: average, count, sum etc. Let's pick the `sum`for our example.
+3. The **object field** is the field on which your are going to make the calculation, it will be `transactions.amount`in our example.
+4. The **filters** will let you narrow your database into the data frame you want to focus on. We will use it to focus on a) debit transactions, b) made by the current user, c) by card and d) in the last 6 months.
+
+<Aside type="note">
+Filters can be divided in 3 parts:
+
+* **The 1st operand** is necessarily a field from the table you selected in the object field.
+* **The 2nd operand** is a field from the triggering object, or another function
+* **The operator** will compare the two operands to result in a logical value
+</Aside>
+
+Here's what the variable looks like with our example:
+
+<Screenshot src="scenarios/formula/functions/aggregations/aggregations-1.png" caption="Variables apply filters on your database based on the triggering object" bordered />
+
+**Note** that you can (and probably will) combine aggregations and nesting. Here's a typical example of a condition checking if the transaction's amount is more than 10 times greater than the user's average transactions amounts in the last 2 months:
+
+<Screenshot src="scenarios/formula/functions/aggregations/aggregations-2.png" caption="You can easily combine aggregations and nesting" width="500px" bordered />

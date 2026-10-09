@@ -1,8 +1,8 @@
 ---
 title: "Reviewing a screening"
+sidebar:
+  order: 400
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 ## The case manager
 
@@ -10,7 +10,7 @@ A screening can only be reviewed from within a case (coming soon: review by API 
 
 Within the case manager, screenings appear next to the rule executions on decisions that contain one. When the screening is in pending review state, it is displayed along with a button that invites the analyst to review it.
 
-<Screenshot src="screening/reviewing-a-screening-1.png" alt="example sanction check rule" caption="example screening rule" width="75%" bordered />
+<Screenshot src="screening/reviewing-a-screening/reviewing-a-screening-1.png" alt="example sanction check rule" caption="example screening rule" width="75%" bordered />
 
 ## Reviewing matches in a screening
 
@@ -45,7 +45,7 @@ Moreover, a screening:
 * cannot be reviewed (it can only be refined) if the list of returned entities is partial, meaning the search returned more possible hits than the maximum configured at the org level (see [Setting up a screening rule](/screening/setting-up-a-screening-rule/))
 * changes its global status automatically after one of its matches is marked as a real hit, or they have all been reviewed as false positives
 
-<Screenshot src="screening/reviewing-a-screening-2.png" caption="restrictions on decision review status" width="50%" bordered />
+<Screenshot src="screening/reviewing-a-screening/reviewing-a-screening-2.png" caption="restrictions on decision review status" width="50%" bordered />
 
 ## Audit trace
 

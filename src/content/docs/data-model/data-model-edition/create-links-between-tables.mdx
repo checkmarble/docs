@@ -1,0 +1,62 @@
+---
+title: "Create links between tables"
+description: "How to create links between tables. How they are used. Things to keep in mind."
+sidebar:
+  order: 240
+---
+
+How to create links between tables. How they are used. Things to keep in mind.
+
+## The links structure
+
+There is structure to your data, and that is represented in the Marble data model.
+
+Generally speaking, business entities are linked to one another, in several possible ways (`1-1`, `N-1`, `N-N`, `1-N`...). You can model some of this. In fact need to if you want to, for instance, access the ingested value from a previously ingested object (parent table) from a payload object (child table) during a scenario execution.
+
+## Creating links
+
+### Modeling `1-1` and `N-1` links
+
+An example speaks louder than a long theoretical description: let's consider a data model with two tables (`transactions` and `accounts`), obtained by extending the example model of the previous page.
+
+We will create a `N-1` or "many to one" link between transactions and accounts.
+
+<Screenshot src="data-model/data-model-edition/create-links-between-tables/create-links-between-tables-1.png" bordered />
+
+The intention is fairly clear here: every transaction belongs to an account, and every account has multiple transactions. The relation can be "walked up" unambiguously by finding the (0 or 1) ingested parent account of a given transaction. The "joining key" is `transactions.account_id = accounts.object_id`.
+
+We will materialize this by creating a directed link starting from the transactions table.
+
+<Screenshot src="data-model/data-model-edition/create-links-between-tables/create-links-between-tables-2.png" width="150px" bordered />
+
+You create a link by giving it a name (by default, the name of the target table is a good choice), choosing the fields in the parent and child table on which the join can be made. In this case, we select the base table (transactions) field `account_id` and the parent table field `object_id`.
+
+<Screenshot src="data-model/data-model-edition/create-links-between-tables/create-links-between-tables-3.png" width="800px" bordered />
+
+<Aside type="note" title="Unicity and eligible fields">
+A link must point unambiguously from a child to a parent entity. That is why only fields marked as unique are eligible as "targets" of a link on the parent table. By default, the `object_id` field, that always exists, is always unique hence always a valid target.
+</Aside>
+
+<Screenshot src="data-model/data-model-edition/create-links-between-tables/create-links-between-tables-4.png" bordered />
+
+<Screenshot src="data-model/data-model-edition/create-links-between-tables/create-links-between-tables-5.png" bordered />
+
+At this point, the data model is complete and ready for use. In the scenario builder, you will be able to access the status, balance (etc) of an ingested account object every time you want to take a decision on a transaction object.
+
+Of course, more complex links are possible. You can imagine having several layers of entities with directed links, and circular references are possible (e.g. an account corresponding to a virtual IBAN could have a parent account with the real IBAN).
+
+<Screenshot src="data-model/data-model-edition/create-links-between-tables/create-links-between-tables-6.png" bordered />
+
+<Aside type="note" title="Foreign key enforcement">
+Links are similar to database foreign keys, but they are not implemented as concret foreign keys. What this means is, in particular, that we will not reject an insertion on a table if it has a link to a parent table, but the parent table contains no object matching the id found in the child table linked field (e.g. in the example above, if no account exists for this `transaction.account_id`).
+</Aside>
+
+### Modeling `1-N` links
+
+You cannot, and don't need to, create "one to many" links in the Marble data model (other than remarking that it is nothing else than a `N-1` link in the other direction).
+
+In particular, you will be able to compute aggregates on all transactions belonging to a given account without explicitly modeling a link for this.
+
+### Modeling `N-N` links
+
+Similarly, you cannot and don't need to model links of the "many to many" category.

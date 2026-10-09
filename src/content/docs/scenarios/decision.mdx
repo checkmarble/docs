@@ -1,9 +1,8 @@
 ---
 title: "Decision"
+sidebar:
+  order: 600
 ---
-
-import Glossary from '../../../components/Glossary.astro';
-import Screenshot from '../../../components/Screenshot.astro';
 
 With Trigger and Rules defined, a scenario evaluation results in a global score that can be tedious to interpret: the amplitude of scores evolves over the lifetime of a scenario, and different scenarios may use different scales for scoring.
 
@@ -26,12 +25,12 @@ To convert the global score into an outcome, a scenario defines three thresholds
 2. A maximum score until which the outcome will be Review.
 3. A maximum score until which the outcome will be Block and Review.
 
-:::note[All outcomes are not always required in a scenario]
+<Aside type="note" title="All outcomes are not always required in a scenario">
 You can adjust thresholds in order to use up to the 4 possible outcomes. **Approve** and **Decline** are always used, but **Review** and **Block and Review** can be selected depending on the scenario use case.\
 To exclude one of these the outcomes, just set its threshold to the same value as the previous or following one.
-:::
+</Aside>
 It is better illustrated by this image
 
-<Screenshot src="scenarios/decision-1.png" />
+<Screenshot src="scenarios/decision/decision-1.png" />
 
 You can adapt these thresholds during the lifetime of a scenario. Adding rules may raise the global score, and you can change thresholds to curate the outcome without impacting workflows based on those outcomes.

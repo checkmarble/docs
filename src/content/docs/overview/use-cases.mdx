@@ -1,0 +1,46 @@
+---
+title: Use cases
+description: Risk and AML use cases covered by Marble, on transactions, users and custom events.
+sidebar:
+  order: 300
+---
+
+Marble allows you to cover a wide range of risk and AML use cases by using our templates or creating your own rules to verify transactions, users or even custom events.
+
+## Transactions
+
+_Card transactions, instant SEPA, request to pay, direct debit, regular SEPA transfers…_
+
+Leverage our real time or batch scenario capabilities to monitor all kinds of money movements.
+
+Examples of rules to implement:
+
+- **Velocity** rules based on tokens, IBANs, BINs, IP, phone numbers …
+- **Deviation** rules comparing an amount to its historical averages, percentiles…
+- **Familiarity** rules counting, for examples, the number of times an IBAN has been used in the past
+- **Custom or external lists** to flag risky keywords, blacklisted IBANs or card tokens, higher risk counterparts, countries flagged by the GAFI…
+- **Context analysis** to detect **abnormal activities** by reviewing the users, accounts, and all recent events linked to the transactions
+
+## Users
+
+_Individuals, companies, non-profits…_
+
+One of the basics of AML monitoring is to check **whether your users’ actual activity is in line with what you expect of them** and detect any notable change that should be investigated.
+
+Cross-analyze your data and detect :
+
+- Changes in transaction volume, origin or destination patterns
+- Fast movements emptying the account or to multiple accounts
+- Unexplainable cross border transfers
+- Unknown device fingerprint
+
+## Events
+
+_Signups, new beneficiaries, profile updates…_
+
+We recognize that not all risky events are transactions and let you create as many custom events as you need. Give it a name, declare how it relates to at least one object of Marble’s data model and you’re ready to go!
+
+Creating custom events will help you:
+
+- Detect account takeovers, unauthorized profile sharings, Xpay frauds, and many more before a transaction is even initiated!
+- Refine your transaction and user monitoring scenarios to lower the number of false positives

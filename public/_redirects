@@ -1,0 +1,30 @@
+# Keystatic admin is a client-side app served by /keystatic/ (see src/keystatic/integration.ts).
+/keystatic/* /keystatic/ 200
+
+# Pages moved into subfolders (sidebar groups), from their former URLs.
+/scenarios/functions /scenarios/formula/functions/ 301
+/scenarios/functions/ /scenarios/formula/functions/ 301
+/data-model/create-a-table /data-model/data-model-edition/create-a-table/ 301
+/data-model/create-a-table/ /data-model/data-model-edition/create-a-table/ 301
+/data-model/create-fields-in-a-table /data-model/data-model-edition/create-fields-in-a-table/ 301
+/data-model/create-fields-in-a-table/ /data-model/data-model-edition/create-fields-in-a-table/ 301
+/data-model/editing-a-field-in-a-table /data-model/data-model-edition/editing-a-field-in-a-table/ 301
+/data-model/editing-a-field-in-a-table/ /data-model/data-model-edition/editing-a-field-in-a-table/ 301
+/data-model/create-links-between-tables /data-model/data-model-edition/create-links-between-tables/ 301
+/data-model/create-links-between-tables/ /data-model/data-model-edition/create-links-between-tables/ 301
+/data-model/enumerated-values /data-model/data-model-edition/enumerated-values/ 301
+/data-model/enumerated-values/ /data-model/data-model-edition/enumerated-values/ 301
+/scenarios/basics /scenarios/formula/basics/ 301
+/scenarios/basics/ /scenarios/formula/basics/ 301
+/scenarios/using-lists-in-rules /scenarios/formula/using-lists-in-rules/ 301
+/scenarios/using-lists-in-rules/ /scenarios/formula/using-lists-in-rules/ 301
+/scenarios/aggregations /scenarios/formula/functions/aggregations/ 301
+/scenarios/aggregations/ /scenarios/formula/functions/aggregations/ 301
+/scenarios/string-similarity /scenarios/formula/functions/string-similarity/ 301
+/scenarios/string-similarity/ /scenarios/formula/functions/string-similarity/ 301
+/scenarios/datetime-functions /scenarios/formula/functions/datetime-functions/ 301
+/scenarios/datetime-functions/ /scenarios/formula/functions/datetime-functions/ 301
+/scenarios/multiple-of-a-threshold /scenarios/formula/functions/multiple-of-a-threshold/ 301
+/scenarios/multiple-of-a-threshold/ /scenarios/formula/functions/multiple-of-a-threshold/ 301
+/scenarios/extract-a-part-from-a-timestamp /scenarios/formula/functions/extract-a-part-from-a-timestamp/ 301
+/scenarios/extract-a-part-from-a-timestamp/ /scenarios/formula/functions/extract-a-part-from-a-timestamp/ 301

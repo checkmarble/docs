@@ -1,0 +1,113 @@
+---
+title: "String similarity"
+description: "Function used to quantify how similar two strings (sequences of characters) are to each other"
+sidebar:
+  order: 822
+---
+
+Function used to quantify how similar two strings (sequences of characters) are to each other
+
+## Definition
+
+String similarity involves several key components:
+
+* **Similarity Algorithm**: A mathematical or algorithmic method used to quantify how similar two strings are.
+* **Matching Threshold**: A predefined level or threshold to compare the similarity score against.
+* **Input Strings**: The two strings that you want to compare for similarity.
+
+The result of the comparison is a boolean value:
+
+* **True:** If the similarity score meets or exceeds the threshold, indicating that the strings are considered similar.
+* **False**: If the similarity score is below the threshold, indicating that the strings are not considered similar.
+
+### Similarity Algorithm
+
+#### Ratio algorithm
+
+The *ratio* scoring is well adapted to compare two strings that are expected to be nearly equal (up to some character permutations).
+
+It does not yield useful results to compare strings of greatly different lengths even one is included in the other, or to compare the word contents of longer strings composed of words.
+
+| Right string                         | Left string                         | Score |
+| ------------------------------------ | ----------------------------------- | ----- |
+| teatime                              | tea time                            | 93    |
+| the dog was walking on the side walk | the dog was walking on the sidewalk | 98    |
+| the d og as walkin' on the side alk  | the dog was walking on the sidewalk | 91    |
+| John Apfelstrudel                    | Mr John Apfelstrudel                | 92    |
+| John Doe                             | Mr Mrs John Jane OR Doe Smith       | 43    |
+| apple peach                          | tree apple peach pear tomato salad  | 49    |
+| ananas                               | banana                              | 83    |
+| strawberry                           | banana                              | 12    |
+
+Use it if you have a high confidence that the two strings you want to match are similar in length and content, and just want to control for small input errors or such.
+
+Even then, be careful that strings "accidentally" similar may have a high similarity score even though they have obviously different meanings ("banana" and "ananas").
+
+You can use the *ratio* scoring by selecting the option **full string similarity** in your String similarity function.
+
+#### Token set ratio
+
+The *token set ratio* scoring works to match strings that are composed of the same words, allowing for minor differences between the two sides. In a banking context, it typically works best to match names or transactions labels, where the simple "ratio" usually fails.
+
+However, it will easily return high scores if all the words on one side are included in the other, which can happen easily for small words, so be careful what you match against: with token set ratio, the risk is to overfit rather than underfit.
+
+The one case where *token set ratio* will return a lower score than a simple *ratio* is for two strings that look broadly similarity from "high level" point of view, with lots of small errors on the words (see row 3 in the table below).
+
+Note that the two will produce the same score when matching single-word strings.
+
+| Left string                            | Right string                         | Score |
+| -------------------------------------- | ------------------------------------ | ----- |
+| tea time                               | teatime                              | 93    |
+| the dog was walking on the sidewalk    | the dog was walking on the side walk | 99    |
+| the dog was walking on the sidewalk    | the d og as walkin' on the side alk  | 72    |
+| Mr John Apfelstrudel                   | John Apfelstrudel                    | 100   |
+| Mr Mrs John Jane OR Doe Smith          | John Doe                             | 100   |
+| tree apple peach pear tomato salad     | apple peach                          | 100   |
+| tree apple peach pear tomato the salad | the                                  | 100   |
+
+You can use the *ratio* scoring by selecting the option **bag of words similarity** in your String similarity function.
+
+#### So which one should I use ?
+
+Ultimately, it depends on your use case and we cannot decide for you. But you can follow the questions below to help you decide.
+
+* Do you want to have a very high level of confidence that only strings that are almost identical (up to a few insertions/deletions) return a high score, at the cost of rejecting medium similarity matches?
+  * Consider using the simple *full string similarity* string score
+* Does one of the strings you want to match come from an unsanitized human input (e.g. a transaction label or an email object)?
+  * Yes: you should probably opt for *bag of words similarity*, unless you believe you know almost exactly the said human input (unlikely in most cases)
+* Do you want to match series of words without respect for their order?
+  * Definitely use *bag of words similarity*
+
+In short, *bag of words similarity* is likely to be more versatile, you should just be careful with accidental matches, especially if one side of the comparison is really short.
+
+#### Other possibilities
+
+There exist plenty of great articles on the different string similarity algorithms (in particular those derived from the python "rapidfuzz" library, as used in Marble). Here are some links [link 1](https://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/), [link 2](https://www.jashds.com/blog/2019/05/13/fuzzy-stringmatching-python).
+
+You will see that other similarity scores exist, which we have chosen not to include in the Marble rule builder for now, for the sake of simplicity. If you feel like you need to use one of those variants, feel free to reach out to us.
+
+### Matching Threshold
+
+Once you have chosen an algorithm, you still need to define what is a reasonable matching level.
+
+In the Marble rule builder, we propose two predefined levels: `HIGH` which corresponds to a score of 85% or higher, and `MEDIUM` which corresponds to a score of 70% or higher.
+
+We believe that matching scores below 70% are often hard to interpret as a match, because a score of 50-60% can easily occur "accidentally".
+
+## Example
+
+### Example 1: in a standard rule
+
+Suppose we want to check if the transaction emmitter name is close to elements from the EDES database :
+
+1. **Select the Function**: Choose the "String similarity" function to compare the emmiter name to the database
+2. **Create the text match**: Use the dedicated modal to create the text match with the necessary parameters.
+3. **Save and View**: After saving, the text match will be displayed in the builder, showing the specified condition.
+
+### Example 2: in an aggregate variable
+
+Let’s say we’d like to check if the creditor name, indicated by the emitter of a transfer, matches at least one the aliases registered by our customer.
+
+1. **Create an aggregate:** create a count aggregate, that will count aliases' object IDs.
+2. **Compare to creditor name:** use the `similar to`operator to compare the aliases full name with the transaction creditor name. Here, we will prefer the « bag of words » (see [String similarity](/scenarios/formula/functions/string-similarity/#token-set-ratio)) comparison with a high sensitivity
+3. **Set the hit condition:** here, we want the rule to be triggered if no matches are found, so we select the `=`operator with value 0.

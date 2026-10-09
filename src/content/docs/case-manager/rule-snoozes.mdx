@@ -1,8 +1,8 @@
 ---
 title: "Rule snoozes"
+sidebar:
+  order: 200
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 At Marble, we believe that rules are useful to keep risk under control, because they give you flexibility and explainability. However, it is well known that rules for risk detection are prone to false positives, when a certain user’s behavior repeatedly triggers a rule despite their usage having been human-reviewed and deemed acceptable.
 
@@ -20,15 +20,15 @@ To snooze a rule, follow these simple steps:
 
 1. Click the **Snooze rules** button, just above the alerts tables
 
-   <Screenshot src="case-manager/rule-snoozes-1.png" width="600px" bordered />
+   <Screenshot src="case-manager/rule-snoozes/rule-snoozes-1.png" width="600px" bordered />
 
 2) Click the **Snooze** button on the rule you want to snooze
 
-   <Screenshot src="case-manager/rule-snoozes-2.png" width="600px" bordered />
+   <Screenshot src="case-manager/rule-snoozes/rule-snoozes-2.png" width="600px" bordered />
 
 3. Selection the **duration of the snooze**, enter a comment (recommended for the audit trail) and click Snooze.
 
-   <Screenshot src="case-manager/rule-snoozes-3.png" width="600px" bordered />
+   <Screenshot src="case-manager/rule-snoozes/rule-snoozes-3.png" width="600px" bordered />
 
 ### Audit trail
 
@@ -57,9 +57,9 @@ With the rule snooze feature, all successive versions of a rule (defined as succ
 
 New rules (including rules created by cloning an existing rule) start with a fresh (empty) set of rule snoozes.
 
-:::note
+<Aside type="note">
 ### The following section can be safely ignored if you never move back to older versions of a scenario. However, you should read it if you occasionally do so, as it may lead to unexpected behaviour (at first sight).
-:::
+</Aside>
 
 Assume you have a rule “rule A” in 3 successive versions of a scenario (1, 2 and 3). Assume also that the first rule snooze for rule A was created on version 2 of the scenario.
 

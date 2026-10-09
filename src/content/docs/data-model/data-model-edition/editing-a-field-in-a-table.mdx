@@ -1,0 +1,14 @@
+---
+title: "Editing a field in a table"
+description: "Things to keep in mind while editing an existing field in a table"
+sidebar:
+  order: 230
+---
+
+Things to keep in mind while editing an existing field in a table
+
+Largely, everything that was explained in the page [Create fields in a table](/data-model/data-model-edition/create-fields-in-a-table/) remains true.
+
+Some differences should noted on making an existing field unique post-creation. Enforcing uniqueness on an existing field takes a while (the time it takes for the database to create a unicity index), and the operation can fail if there already exist duplicate values in the ingested data.
+
+If you want to make a field unique and the update fails, reach out to us: [contact@checkmarble.com](mailto:contact@checkmarble.com) (or resolve the issues in the marble DB if you are using our open-source offering).

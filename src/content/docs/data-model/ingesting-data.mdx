@@ -1,9 +1,9 @@
 ---
 title: "Ingesting data"
 description: "How and why to ingest data. Interfaces and formats."
+sidebar:
+  order: 400
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 How and why to ingest data. Interfaces and formats.
 
@@ -14,7 +14,7 @@ When making a decision with the Marble decision engin, you can rely on 3 types o
 1. live data from the payload (or trigger) object
 2. data stored in lists
 3. data ingested, out of which
-   1. field values from parent tables (see [links\* ](/data-model/create-links-between-tables/))
+   1. field values from parent tables (see [links\* ](/data-model/data-model-edition/create-links-between-tables/))
    2. aggregates computed on any table in the data model (with filters derived from the payload object)
 
 You will almost always need to ingest historical data to leverage on decisions, as this is the most "powerful" and complete source of data available.
@@ -51,7 +51,7 @@ In particular, we verify:
 * type validation according to the declared field type (string, boolean, number, timestamp)
 * where applicable (i.e. for timestamps), format validation for parsing
 
-:::note[Timestamp format]
+<Aside type="note" title="Timestamp format">
 We expect RFC3339 format timestamps. Below are some examples of valid timestamps:
 
 - 2024-05-29T15:21:09Z
@@ -63,13 +63,13 @@ We expect RFC3339 format timestamps. Below are some examples of valid timestamps
 Anything that deviates from this format is probably going to be rejected - though if in doubt, test it or reach out to us.
 
 If the timezone information (`Z` for UTC or an offset from UTC) is not provided (like in the last two examples), the timestamp will be assumed to represent a moment in time in UTC (+00:00).
-:::
+</Aside>
 
 Additional properties in the payload are ignored by API and rejected in batch CSVs.
 
 ### Chart
 
-<Screenshot src="data-model/ingesting-data-1.png" alt="Ingestion workflow" width="75%" bordered />
+<Screenshot src="data-model/ingesting-data/ingesting-data-1.png" alt="Ingestion workflow" width="75%" bordered />
 
 ## Ingestion methods
 
@@ -77,21 +77,21 @@ Additional properties in the payload are ignored by API and rejected in batch CS
 
 You can find our API documentation for ingestion [here](/api/v1/#tag/ingestion).
 
-You will also find an automatically generated Openapi spec corresponding to your specific data model in the <a href="/api/v1/#tag/ingestion/POST/ingest/\{objectType\}" target="_blank" rel="noopener">Marble API</a> section of the console.
+You will also find an automatically generated Openapi spec corresponding to your specific data model in the [Marble API](/api/v1/#tag/ingestion/POST/ingest/{objectType}) section of the console.
 
 Ingest data by calling `https://api.checkmarble.com/v1/ingest/{table_name}`. The data ingestion API is expected to be used with server to server credentials, and as such expects an API key that can be generated in the Marble console.
 
-:::tip[Production use]
+<Aside type="tip" title="Production use">
 Ingestion by API is the preferred method of data ingestion. It will allow you to have the freshest data available for you decisions at any given time.
-:::
+</Aside>
 
 ### By batch (CSV files)
 
 For the purpose of easier testing of the tool, and easiest ingestion of occasional data (any data that should be ingested but changes only rarely), we give access to a batch ingestion interface, accessible through the data model page.
 
-<Screenshot src="data-model/ingesting-data-2.png" bordered />
+<Screenshot src="data-model/ingesting-data/ingesting-data-2.png" bordered />
 
-<Screenshot src="data-model/ingesting-data-3.png" />
+<Screenshot src="data-model/ingesting-data/ingesting-data-3.png" />
 
 The page allows you to download a template .csv file, that you may complete with your data. In particular, the CSV should be coma-separated, and contain all required fields for the table.
 
@@ -99,17 +99,17 @@ The order of fields in the header row does not matter, as long as the values are
 
 When you drop a file on the upload page, we validate the rows against your data model as they are being sent, and notify you of any bad rows. If the validation is successful, the actual ingestion then happens asynchronously (but shortly after the validation).
 
-:::caution[Payload validation]
+<Aside type="caution" title="Payload validation">
 If any object within a batch ingestion is rejected, the entire payload will be rejected. You must resolve the issue(s) with the problematic object(s) and retry the ingestion with a corrected payload.
-:::
+</Aside>
 
 We impose a 1 min timeout on the upload of the file. If you plan to send many rows (especially if you have many columns to send), this may limit the size of files you can send by this method.
 
 Note that in batch ingestion from CSV, we will accept missing values from string fields as the empty string, except for the `object_id` which must take a non-empty value.
 
-:::note[Initial data load]
+<Aside type="note" title="Initial data load">
 You are likely to want to do an initial data load of historical data when you start operating Marble (assuming further ingestion happens in real time by API). The 1 min timeout is sure to be a bottleneck when doing this. We can assist you manually in this usecase, by bypassing an upload from the console.
-:::
+</Aside>
 
 ### Asynchronous API batch (CSV)
 

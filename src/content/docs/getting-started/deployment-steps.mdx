@@ -1,9 +1,8 @@
 ---
 title: "Deployment steps"
+sidebar:
+  order: 600
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
-import YouTube from '../../../components/YouTube.astro';
 
 ## Introduction
 
@@ -61,7 +60,7 @@ Let's suppose you want to create a scenario to evaluate the risk of your outgoin
 
 In the [scenario's trigger page](/scenarios/trigger/), we'll limit our analysis to transactions with a `type = "transfer"`and `direction = "debit"`.
 
-<Screenshot src="getting-started/deployment-steps-1.png" caption="Only objects that match the scenario's trigger conditions will be evaluated" width="600px" bordered />
+<Screenshot src="getting-started/deployment-steps/deployment-steps-1.png" caption="Only objects that match the scenario's trigger conditions will be evaluated" width="600px" bordered />
 
 #### Build your first rules
 
@@ -82,11 +81,11 @@ Once your rules are ready, you can switch to the *Decision* tab to configure the
 You are almost ready! Before moving forward to the APIs implementation and creating your first decisions, you should set up your scenario's workflow.
 This will allow you to automatically add your new decisions to an existing case or a new one based on your criteria.
 
-:::note
+<Aside type="note">
 Before setting up your workflow, make sure that you added a **decision group** to the triggering object in your data model. You can find more details about this in [Grouping decisions](/data-model/grouping-decisions/).
 
 In our example, we chose to group decisions on transactions by Users.
-:::
+</Aside>
 
 To set up your scenario's workflow, follow these steps:
 
@@ -97,13 +96,13 @@ To set up your scenario's workflow, follow these steps:
 * Create your inbox and define the names of the cases to be created
 * Save the rule
 
-<Screenshot src="getting-started/deployment-steps-2.png" caption="Manage your cases using the workflow" bordered />
+<Screenshot src="getting-started/deployment-steps/deployment-steps-2.png" caption="Manage your cases using the workflow" bordered />
 
-:::note
+<Aside type="note">
 This workflow will add all decisions that have an outcome other than _Approve_ to an existing case for the user, or create one if there is not any.
 
 You have many other options in the workflows, that you can discover on [Workflows](/scenarios/workflows/).
-:::
+</Aside>
 
 ### Set up and test your APIs
 
@@ -118,7 +117,7 @@ For real-time decisions, you will run your scenario by API:
 
 Note that, in the case of a real-time scenario, we strongly recommend that you first call the Decision API, then ingest the object, as explained in the chart below.
 
-<Screenshot src="getting-started/deployment-steps-3.png" caption="When using real-time decisions, you should call the Decision API before the Ingestion" width="600px" />
+<Screenshot src="getting-started/deployment-steps/deployment-steps-3.png" caption="When using real-time decisions, you should call the Decision API before the Ingestion" width="600px" />
 
 ### Test and optimize
 

@@ -1,9 +1,9 @@
 ---
 title: How Marble works
 description: The key components of Marble — data model, scenarios and rules, the Data Ingestion API and the Decision API.
+sidebar:
+  order: 400
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 Marble allows anyone to make a `decision` based on a number of predefined `rules` organized in `scenarios`.
 
@@ -17,7 +17,7 @@ Defining this data model makes it easy to create rules in the admin panel, and a
 
 Marble does not impose a specific data model for its clients, but our recommended starting point is to work with `users`, `companies`, `accounts`, `events` and `transactions` objects. See the [data model introduction](/data-model/introduction/)
 
-<Screenshot src="overview/data-model-example.png" caption="Example of data model" bordered />
+<Screenshot src="overview/how-marble-works/data-model-example.png" caption="Example of data model" bordered />
 
 ## Create scenarios and rules
 
@@ -29,7 +29,7 @@ The scenario’s final score determines a single outcome for the decision: _Appr
 
 Rules can use data from multiple sources: the decision API’s payload, your historical database, our manually-defined lists input from the admin panel.
 
-<Screenshot src="overview/simple-rule.png" caption="A simple rule" bordered />
+<Screenshot src="overview/how-marble-works/simple-rule.png" caption="A simple rule" bordered />
 
 ## Send historical data using the Data Ingestion API
 
@@ -53,12 +53,12 @@ From here, you can check if the decision’s outcome is _Approve_, _Review_, _Bl
 
 The Decision API documentation is located [here](/api/v1/)
 
-:::note[Recommended Order of API Calls]
+<Aside type="note" title="Recommended Order of API Calls">
 We recommend calling the **Decision API** first, followed by the **Ingestion API**. This approach offers several advantages:
 
 - **Faster response time:** If you're using Marble in real-time, calling the Decision API first avoids the overhead of ingestion processing during the critical path. You can handle ingestion afterward, once the triggering transaction is processed.
 - **Accurate transaction counting:** By calling the Decision API before ingestion, you ensure the transaction isn’t counted twice — especially useful if you're using aggregates. Since the transaction isn't yet stored in your database, it only exists in the payload sent to the API.
 - **Ingest with final status:** Knowing Marble’s outcome in advance allows you to ingest the transaction with its definitive status, eliminating the need for a later `PATCH` request.
-:::
+</Aside>
 
-<Screenshot src="overview/decision-ingestion-flow.png" caption="Our recommended Decision/Ingestion flow" width="600px" />
+<Screenshot src="overview/how-marble-works/decision-ingestion-flow.png" caption="Our recommended Decision/Ingestion flow" width="600px" />

@@ -1,22 +1,24 @@
 ---
 title: "Setting up a screening rule"
+sidebar:
+  order: 200
 ---
-
-import Screenshot from '../../../components/Screenshot.astro';
 
 ## Rule creation
 
 Create a screening rule is to be done from a scenario, in the rules section.
 
-<Screenshot src="screening/setting-up-a-screening-rule-1.png" alt="create a new sanction check rule" width="75%" bordered />
+<Screenshot src="screening/setting-up-a-screening-rule/setting-up-a-screening-rule-1.png" alt="create a new sanction check rule" width="75%" bordered />
 
 ## Rule configuration
 
 ### Global organization configuration of screenings
 
-* **Similarity matching threshold**: it is the minimum similarity score (as a %) for an entity to be considered a possible match on a sanction list.<br />The default value is 70%, which we believe is a reasonable base value in most cases : higher values will result in less hits, at the risk of missing some true positives.<br />In this section you can override the default similarity threshold, this newly defined threshold will be used only for this rule.
+* **Similarity matching threshold**: it is the minimum similarity score (as a %) for an entity to be considered a possible match on a sanction list.\
+  The default value is 70%, which we believe is a reasonable base value in most cases : higher values will result in less hits, at the risk of missing some true positives.\
+  In this section you can override the default similarity threshold, this newly defined threshold will be used only for this rule.
 
-<Screenshot src="screening/setting-up-a-screening-rule-2.png" alt="In this example, the similarity threshold will be 85% despite the default value being 70%" width="500px" bordered />
+<Screenshot src="screening/setting-up-a-screening-rule/setting-up-a-screening-rule-2.png" alt="In this example, the similarity threshold will be 85% despite the default value being 70%" width="500px" bordered />
 
 * A max number of hits to consider is also defined at the organisation level : it is the maximum number of hits for a screening review with store. If a screening has more hits than this, the reviewer will be asked to refine the search before he can close the case. See the [refine](/screening/screening-refine/) page. The default value is 30.
 
@@ -44,6 +46,7 @@ There are several settings that can be configured in your screening:
   * *Exclude terms listed in custom lists*: remove any terms (like recurring terms such as Mr, Mrs for example), defined in one of your lists. You need to create a custom list first, in the Lists section
   * *Exclude numbers*: remove all numbers from the entity name to only keep alphabetical characters
   * *Do not screen very short words*: define a minimum number of characters, below which the screening will be skipped to avoid noise
-  * *Enable AI name recognition*: Use AI to extract person or company names from free-form text and use it for a more precise screening.<br />Note this is an experimental feature and may significantly increase the response time when requesting decisions.
+  * *Enable AI name recognition*: Use AI to extract person or company names from free-form text and use it for a more precise screening.\
+    Note this is an experimental feature and may significantly increase the response time when requesting decisions.
 
-<Screenshot src="screening/setting-up-a-screening-rule-3.png" alt="Matching options help you narrow your screenings and reduce noise" bordered />
+<Screenshot src="screening/setting-up-a-screening-rule/setting-up-a-screening-rule-3.png" alt="Matching options help you narrow your screenings and reduce noise" bordered />

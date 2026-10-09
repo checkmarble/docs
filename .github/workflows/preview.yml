@@ -36,6 +36,8 @@ jobs:
           echo "ref=$(cat openapi/.ref)" >> "$GITHUB_OUTPUT"
 
       - run: bun run build
+        env:
+          PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: ${{ vars.KEYSTATIC_GITHUB_APP_SLUG }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -52,6 +54,15 @@ jobs:
       deployments: write
       pull-requests: write
     steps:
+      # The Keystatic API function (functions/) is bundled at deploy time, with its dependencies.
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun install --frozen-lockfile
+
       - uses: actions/download-artifact@v4
         with:
           name: dist
@@ -62,6 +73,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          packageManager: bun
           command: pages deploy dist --project-name=marble-docs --branch=pr-${{ github.event.pull_request.number }} --commit-hash=${{ github.event.pull_request.head.sha }}
 
       - uses: marocchino/sticky-pull-request-comment@v2
